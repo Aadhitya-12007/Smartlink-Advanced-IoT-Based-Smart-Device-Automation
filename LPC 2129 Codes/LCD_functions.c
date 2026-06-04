@@ -1,5 +1,5 @@
 //Code by Aadhitya G
-//Contains the LCD setup functions
+//Contains the HD44780 16x2 Alphanumeric LCD setup functions
 
 #include <lpc21xx.h>
 #include "setup.h"
