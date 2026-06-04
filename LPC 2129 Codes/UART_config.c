@@ -1,3 +1,6 @@
+//Code by Aadhitya G
+//Code holds the LPC2129's UART configuration, receive and transmit functions
+
 #include <lpc21xx.h>
 #include "setup.h"
 
