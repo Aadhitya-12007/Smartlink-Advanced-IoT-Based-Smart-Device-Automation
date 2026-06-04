@@ -1,3 +1,6 @@
+//Code by Aadhitya G
+//Program for the Timer delay (In milliseconds)
+
 #include <lpc21xx.h>
 #include "setup.h"
 
