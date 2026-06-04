@@ -1,3 +1,6 @@
+//Code by Aadhitya G
+//Main program
+
 #include <lpc21xx.h>
 #include "setup.h"
 
