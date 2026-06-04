@@ -1,3 +1,6 @@
+//Code by Aadhitya G
+//Contains the LCD setup functions
+
 #include <lpc21xx.h>
 #include "setup.h"
 
