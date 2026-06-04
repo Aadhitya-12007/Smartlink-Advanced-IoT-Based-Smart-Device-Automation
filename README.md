@@ -3,28 +3,28 @@
 ![Platform](https://img.shields.io/badge/Platform-LPC2129%20%7C%20ESP8266mod-blue)
 ![Language](https://img.shields.io/badge/Language-Embedded%20C-orange)
 
-## 📌 Project Overview
+## Project Overview
 **Smartlink** is a robust, master-slave IoT automation framework that bridges cloud-based remote interfaces with deterministic, bare-metal hardware execution. 
 
 Designed to overcome the limitations of single-SoC IoT setups, this architecture uses an **ESP8266mod** as a dedicated network coprocessor to handle Wi-Fi connectivity and MQTT brokering via the Arduino IoT Cloud. The network module translates remote dashboard interactions into asynchronous serial commands (UART). These commands are transmitted to an **LPC2129 (ARM7)** master controller running bare-metal C firmware. The LPC2129 ensures highly reliable, real-time hardware execution, driving a local LCD interface and safely actuating high-voltage AC loads via an opto-isolated relay manifold.
 
 **Author:** Aadhitya G.
 
-## 🛠️ Hardware Components Required
+## Hardware Components Required
 * **LPC2129 Development Board** (ARM7TDMI-S Master Controller)
 * **ESP8266 NodeMCU** (Network Coprocessor / Wi-Fi Bridge)
-* **16x2 Alphanumeric LCD** (Local UI)
+* **HD44780 based 16x2 Alphanumeric LCD** (Local UI)
 * **4-Channel Opto-isolated Relay Module** (Actuator)
-* **4x Test LEDs & 330Ω Resistors** (For safe logic testing)
+* **4x Test LEDs & 330Ω Resistors** (For safe logic testing before the actual implementation)
 * **Jumper Wires & Breadboard**
-* **Standard 3.3V Power Supply**
+* **Standard 3.3V Power Supply (Vcc)**
 
-## 💻 Software & Toolchain
+## Software & Toolchain
 * **Keil µVision** (For compiling the bare-metal C firmware for LPC2129)
-* **Arduino IoT Cloud** (For the remote MQTT dashboard and uploading the sketch to ESP8266mod)
+* **Arduino IoT Cloud** (For the remote MQTT dashboard (virtual switches) and uploading the sketch to ESP8266mod)
 * **Flash Magic** (Or equivalent programmer for LPC2129)
 
-## ⚙️ System Architecture & Pin Mapping
+## System Architecture & Pin Mapping
 
 ### UART Communication (The Bridge)
 Both microcontrollers operate on 3.3V logic, allowing for direct, level-shifter-free communication at 9600 Baud.
@@ -38,26 +38,26 @@ Both microcontrollers operate on 3.3V logic, allowing for direct, level-shifter-
 * **LCD Data/Control:** `P0.2` to `P0.11`
 * **Relay/LED Outputs:** `P0.12` to `P0.15`
 
-## 🚀 Step-by-Step Initialization & Execution
+## Step-by-Step Initialization & Execution
 
-### Step 1: Configure the Arduino IoT Cloud
+### Step 1 - Configure the Arduino IoT Cloud
 1. Navigate to the [Arduino IoT Cloud](https://cloud.arduino.cc/).
 2. Create a new "Thing" and bind it to your ESP8266mod NodeMCU device.
 3. Add four Cloud Variables: `L1`, `L2`, `L3`, and `L4` (Type: Boolean/CloudLight, Permission: Read & Write).
 4. Navigate to the "Dashboards" tab and create 4 switch widgets mapped to these variables.
 
-### Step 2: Flash the ESP8266mod Microcontroller
+### Step 2 - Flash the ESP8266mod Microcontroller
 1. Open the auto-generated sketch in the Web Editor.
 3. Map the state of `L1`-`L4` inside the auto-generated callback functions to transmit specific character bytes over `Serial` (e.g., `if (L1 == true) { Serial.print('A'); }`).
 4. Upload the code to the ESP8266mod.
 
-### Step 3: Flash the LPC2129 Bare-Metal Firmware
+### Step 3 - Flash the LPC2129 Bare-Metal Firmware
 1. Open the provided project files in Keil µVision.
 2. Ensure the `UART0_Rx()` logic is set to **polling mode** (not interrupt-driven) to sequentially parse incoming commands.
 3. Compile the `.c` files (`main.c`, `LCD_functions.c`, `UART_config.c`, etc.) to generate the `.hex` binary.
 4. Flash the binary to the LPC2129 using Flash Magic.
 
-### Step 4: Hardware Assembly & Testing
+### Step 4 - Hardware Assembly & Testing
 1. Wire the common ground between the LPC2129, ESP8266mod, and your power supply.
 2. Connect the TX/RX lines according to the pin mapping table.
 3. *Phase 1 (Safe Testing):* Connect standard LEDs to pins `P0.12` - `P0.15` to verify the logic.
