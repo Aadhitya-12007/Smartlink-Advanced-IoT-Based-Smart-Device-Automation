@@ -35,6 +35,7 @@ Both microcontrollers operate on 3.3V logic, allowing for direct, level-shifter-
 | GND | GND | **Common Ground (Crucial)** |
 
 ### LPC2129 GPIO Mapping
+* **UART0 TxD and RxD** `P0.0` and `P0.1`
 * **LCD Data/Control:** `P0.2` to `P0.11`
 * **Relay/LED Outputs:** `P0.12` to `P0.15`
 
@@ -42,7 +43,7 @@ Both microcontrollers operate on 3.3V logic, allowing for direct, level-shifter-
 
 ### Step 1 - Configure the Arduino IoT Cloud
 1. Navigate to the [Arduino IoT Cloud](https://cloud.arduino.cc/).
-2. Create a new "Thing" and bind it to your ESP8266mod NodeMCU device.
+2. Create a new "Thing" and bind it to your ESP8266mod NodeMCU 1.0 (ESP-12E Module) device.
 3. Add four Cloud Variables: `L1`, `L2`, `L3`, and `L4` (Type: Boolean/CloudLight, Permission: Read & Write).
 4. Navigate to the "Dashboards" tab and create 4 switch widgets mapped to these variables.
 
