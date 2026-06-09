@@ -64,7 +64,7 @@ Both microcontrollers operate on 3.3V logic, allowing for direct, level-shifter-
 3. *Phase 1 (Safe Testing):* Connect standard LEDs to pins `P0.12` - `P0.15` to verify the logic.
 4. *Phase 2 (Deployment):* Replace the LEDs with the `IN1`-`IN4` pins of the relay module. Wire your AC loads through the Normally Open (NO) and Common (COM) terminals of the relays.
 
-### Step 5: Getting the Output
+### Step 5 - Getting the Output
 1. Power up the master LPC2129 board first. The LCD will initialize and display the startup text: `"SmartLink-Smart Device Automatio"`.
 2. Power the ESP8266. Wait 5-10 seconds for it to establish a Wi-Fi connection with the Arduino Cloud.
 3. Open the Arduino IoT Cloud Dashboard on your mobile device or PC.
